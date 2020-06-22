@@ -4,7 +4,8 @@ new Vue({
     running: false,
     playerLife: 100,
     monsterLife: 100,
-    sword: "basic",
+    sword: "Targarian",
+    logs: [],
   },
   computed: {
     hasResult() {
@@ -16,19 +17,24 @@ new Vue({
       this.running = true;
       this.playerLife = 100;
       this.monsterLife = 100;
+      this.logs = [];
     },
     attack() {
       let min = 5,
         max = 10;
-      if (this.sword === "up") {
+      if (this.sword === "Artix Blade") {
         min = 10;
         max = 15;
       }
-      this.monsterLife = Math.max(this.monsterLife - this.hurt(min, max), 0);
+      const damage = this.hurt(min, max);
+      this.monsterLife = Math.max(this.monsterLife - damage, 0);
+      this.generateLogsDamage("player", damage);
       this.monsterAttack();
     },
     monsterAttack() {
-      this.playerLife = Math.max(this.playerLife - this.hurt(7, 12), 0);
+      const damage = this.hurt(7, 12);
+      this.playerLife = Math.max(this.playerLife - damage, 0);
+      this.generateLogsDamage("monster", damage);
     },
     // especialAttack() {
     //   this.monsterLife = Math.max(this.monsterLife - this.hurt(5, 10, true), 0);
@@ -42,12 +48,22 @@ new Vue({
     },
     changeSword(value) {
       this.sword = value;
-      console.log(this.sword);
     },
     heal() {
-      this.playerLife += parseInt(this.randomValue(10, 15));
-      if (this.playerLife > 100) this.playerLife = 100;
+      const heal = parseInt(this.randomValue(10, 15));
+      this.playerLife = Math.min(this.playerLife + heal, 100);
+      this.generateLogsHeal(heal);
       this.monsterAttack();
+    },
+    generateLogsDamage(type, damage) {
+      const playerDamage = `${type} uses your ${this.sword} and causes ${damage} of damage`;
+      const monsterDamage = `${type} uses ROAAAR and causes ${damage} of damage`;
+      if (type === "player") this.logs.push(playerDamage);
+      else this.logs.push(monsterDamage);
+      console.log(this.logs);
+    },
+    generateLogsHeal(heal) {
+      this.logs.push(`Player uses one potion and heals ${heal} of HP`);
     },
   },
   watch: {
