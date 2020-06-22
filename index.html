@@ -38,9 +38,12 @@
     </div>
     <div class="panel buttons">
       <template v-if="running">
-
+        <div>
+          <img @click="changeSword('basic')" class="bnt sword" src="imgs/basic.jpeg" alt="basic">
+          <img @click="changeSword('up')" class="bnt sword" src="imgs/up.png" alt="up">
+        </div>
         <button @click="attack()" class="btn attack">Attack</button>
-        <button @click="especialAttack()" class="btn especial-attack">Especial Attack</button>
+        <!-- <button @click="especialAttack()" class="btn especial-attack">Especial Attack</button> -->
         <button class="btn heal">Heal</button>
         <button @click="running = false" class="btn give-up">Give-up</button>
       </template>

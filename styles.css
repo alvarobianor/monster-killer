@@ -81,6 +81,10 @@ html {
   text-transform: uppercase;
   font-size: 1.1rem;
 }
+.sword {
+  height: 100%;
+  width: 55px;
+}
 
 .new-game {
   background-color: #0de4d2;
