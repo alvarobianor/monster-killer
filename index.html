@@ -37,12 +37,14 @@
 
     </div>
     <div class="panel buttons">
+      <template v-if="running">
 
-      <button class="btn attack">Ataque</button>
-      <button class="btn especial-attack">Ataque Especial</button>
-      <button class="btn heal">Curar</button>
-      <button class="btn give-up">Desistir</button>
-      <button class="btn new-game">Iniciar Jogo</button>
+        <button class="btn attack">Attack</button>
+        <button class="btn especial-attack">Especial Attack</button>
+        <button class="btn heal">Heal</button>
+        <button @click="running = false" class="btn give-up">Give-up</button>
+      </template>
+      <button v-else @click="startGame" class="btn new-game">New game</button>
     </div>
     <div class="panel logs"></div>
   </div>
