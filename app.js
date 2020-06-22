@@ -48,6 +48,10 @@ new Vue({
     },
     changeSword(value) {
       this.sword = value;
+      this.logs.unshift({
+        text: `Player is using your ${this.sword} sword.`,
+        cls: "change-sword",
+      });
     },
     heal() {
       const heal = parseInt(this.randomValue(10, 15));
@@ -66,7 +70,7 @@ new Vue({
     generateLogsHeal(heal) {
       this.logs.unshift({
         text: `Player uses one potion and heals ${heal} of HP`,
-        cls: "player",
+        cls: "player-heal",
       });
     },
   },
