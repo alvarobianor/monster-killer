@@ -58,12 +58,16 @@ new Vue({
     generateLogsDamage(type, damage) {
       const playerDamage = `${type} uses your ${this.sword} and causes ${damage} of damage`;
       const monsterDamage = `${type} uses ROAAAR and causes ${damage} of damage`;
-      if (type === "player") this.logs.push(playerDamage);
-      else this.logs.push(monsterDamage);
+      if (type === "player")
+        this.logs.unshift({ text: playerDamage, cls: type });
+      else this.logs.unshift({ text: monsterDamage, cls: "monster" });
       console.log(this.logs);
     },
     generateLogsHeal(heal) {
-      this.logs.push(`Player uses one potion and heals ${heal} of HP`);
+      this.logs.unshift({
+        text: `Player uses one potion and heals ${heal} of HP`,
+        cls: "player",
+      });
     },
   },
   watch: {
