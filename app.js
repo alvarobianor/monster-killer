@@ -25,7 +25,10 @@ new Vue({
         max = 15;
       }
       this.monsterLife = Math.max(this.monsterLife - this.hurt(min, max), 0);
-      this.playerLife = Math.max(this.playerLife - this.hurt(7, 12, false), 0);
+      this.monsterAttack();
+    },
+    monsterAttack() {
+      this.playerLife = Math.max(this.playerLife - this.hurt(7, 12), 0);
     },
     // especialAttack() {
     //   this.monsterLife = Math.max(this.monsterLife - this.hurt(5, 10, true), 0);
@@ -40,6 +43,11 @@ new Vue({
     changeSword(value) {
       this.sword = value;
       console.log(this.sword);
+    },
+    heal() {
+      this.playerLife += parseInt(this.randomValue(10, 15));
+      if (this.playerLife > 100) this.playerLife = 100;
+      this.monsterAttack();
     },
   },
   watch: {
