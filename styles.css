@@ -9,6 +9,7 @@ html {
 
 .panel {
   margin: 10px;
+  margin-bottom: 10px;
   padding: 20px;
   box-shadow: 0 10px 10px rgba(25, 11, 221, 0.35);
 }
